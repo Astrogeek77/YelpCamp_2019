@@ -4,6 +4,10 @@
   "description": "",
   "main": "app.js",
   "start": "app.js",
+  "scripts": {
+    "Start": "cross-env NODE_ENV=production node app.js",
+    "devStart": "cross-env NODE_ENV=development nodemon app.js"
+  },
   "dependencies": {
     "async": "^3.2.0",
     "body-parser": "^1.19.0",
