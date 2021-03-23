@@ -1,0 +1,56 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+	<header class="jumbotron">
+		<div class="container">
+			<h1 class="display-3">
+				 You have reached the campsite Showcase!
+			</h1>
+			<P id="home-text">
+				Awesome! Here are some of best campsites handpicked by travellers..
+			</P>
+			<p>
+				<a class="btn btn-success btn-lg" href="/campgrounds/new">Add New Campsite <i class="fas fa-plus"></i></a>
+			</p>
+			<form action="/campgrounds" method="GET" style="margin-top: 30px">
+					  <input style="width: 70%; height: 50px; display: inline-block" class="form-control mr-sm-2" type="text" name="search" placeholder="Search Campgrounds" aria-label="Search">
+					  <button style="width: 100px; text-transform: uppercase; display: inline-block; padding: 13px; margin: 0 2px 2px 2px" class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+		</div>	
+	</header>
+	
+	<div class="row text-center" style="display:flex; flex-wrap: wrap; ">
+		  <div class="col-md-12">
+             <% if(noMatch !== null) { %>
+             <h3><%= noMatch %></h3>
+             <p>
+            	<form action="/campgrounds" method="GET" class="form-inline mr-5">
+            		<div class="form-group">
+            			<input type="text" name="search" placeholder="Campground search..." class="form-control">
+            			<input type="submit" value="Search" class="btn btn-default">
+            		</div>
+            	</form>
+            </p>
+             <% } %>
+         </div>
+		<% campgrounds.forEach(function(campground){ %>
+		<div class=" col-lg-3 col-md-4 col-sm-6">
+			<div class="card mb-4">
+			  <a href="/campgrounds/<%= campground._id %>"><img src="<%= campground.image %>" class="card-img-top" alt="<%= campground.name %>"></a>
+			  <div class="card-body">
+				<a style="font-size: 20px; text-decoration: none;" href="/campgrounds/<%= campground._id %>" class="card-title"><%= campground.name %></a>
+			  </div>
+			  <div class="card-body pb-3">
+				<a class="btn btn-primary btn-lg d-inline" href="/campgrounds/<%= campground._id %>" class="card-link"><i class="fas fa-external-link-alt"></i> Details</a>
+				<a class="btn btn-warning d-inline btn-sm float-right" class="card-link"><i class="fas fa-comment-dots"></i> <%= campground.comments.length %></a>
+				<div class="d-inline">
+				   <span class="btn btn-sm btn-success float-right"><i class="fas fa-thumbs-up"></i> <%= campground.likes.length %></span>
+			   </div>
+			  </div>
+			</div>
+    	</div>
+	<% }); %>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>
